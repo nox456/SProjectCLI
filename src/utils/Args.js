@@ -39,8 +39,8 @@ export default class Args {
         );
         flag.handler();
     }
-    static handleSubcommand(arg) {
+    static async handleSubcommand(arg) {
         const subcommand = cmds.find(c => c.name == arg)
-        subcommand.handler()
+        await subcommand.handler()
     }
 }
