@@ -28,8 +28,8 @@
     "homepage": "https://github.com/nox456/SProjectCLI#readme",
     "dependencies": {
         "chalk": "^5.4.1",
-        "cli-spinner": "^0.2.10",
         "inquirer": "^12.3.2",
-        "octokit": "^4.1.0"
+        "octokit": "^4.1.0",
+        "ora": "^8.1.1"
     }
 }
