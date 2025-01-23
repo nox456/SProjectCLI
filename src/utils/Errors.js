@@ -8,5 +8,8 @@ export default class Errors {
     static invalidFlag(args) {
         console.error(`${chalk.bold.red("ERROR:")} invalid flag -> ${chalk.bold.red(args[0])}\n${Info.flags()}`)
     }
+    static invalidCommand(args) {
+        console.error(`${chalk.bold.red("ERROR:")} invalid subcommand -> ${chalk.bold.red(args[0])}\n${Info.subcommands()}`)
+    }
 }
 

@@ -10,7 +10,7 @@ export default new Flag(
     },
     () => {
         console.log(
-            `SProjectCLI\n\nA CLI app to manage projects based of simplicity\n${Info.flags()}`,
+            `SProjectCLI\n\nA CLI app to manage projects based of simplicity\n${Info.flags()}\n${Info.subcommands()}`,
         );
     },
 );
