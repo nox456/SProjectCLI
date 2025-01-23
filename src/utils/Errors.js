@@ -4,8 +4,8 @@ import chalk from "chalk";
 
 export function argumentError(args, type) {
     if (type == ARGUMENT_ERRORS.unexpected) {
-        console.error(`${chalk.bold.red("ERROR:")} unexpected argument[s] --> ${chalk.bold.red(args.slice(1).join(","))}, only 1 argument expected\n${Info.flags()}`);
+        console.error(`${chalk.bold.red("ERROR:")} unexpected argument[s] --> ${chalk.bold.red(args.slice(1).join(","))}, only 1 argument expected`);
     } else if (type == ARGUMENT_ERRORS.invalidFlag) {
-        console.error(`ERROR: invalid flag -> '${args[0]}'\n${Info.flags()}`)
+        console.error(`${chalk.bold.red("ERROR:")} invalid flag -> ${chalk.bold.red(args[0])}\n${Info.flags()}`)
     }
 }

@@ -7,7 +7,8 @@ if (!Args.validate(args)) {
     process.exit(1)
 }
 
-console.log("Hello World!!")
-console.log(args)
+if (args[0].startsWith("-")) {
+    Args.handleFlag(args[0])
+}
 
 process.exit(0)
