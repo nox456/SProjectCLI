@@ -26,6 +26,12 @@ export default class Database {
             .filter((l) => l != "." && l != ".." && l.includes("."))
             .includes(".sproject-db.json");
     }
+    /**
+     * @param {Object} param0 
+     * @param {string} param0.name 
+     * @param {string} param0.path 
+     * @param {string} param0.github 
+     * */
     static async addProject({ name, path, github }) {
         const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
             encoding: "utf8",

@@ -39,6 +39,9 @@ export default class Args {
         );
         flag.handler();
     }
+    /**
+     * @param {string} arg 
+     * */
     static async handleSubcommand(arg) {
         const subcommand = cmds.find(c => c.name == arg)
         await subcommand.handler()

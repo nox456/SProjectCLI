@@ -3,6 +3,9 @@ import flags from "../flags/index.js";
 import cmds from "../cmd/index.js";
 
 export default class Info {
+    /**
+     * @returns {string}
+     * */
     static flags() {
         return `
 ${chalk.bold.green("[AVAILABLE FLAGS]:")}
@@ -10,6 +13,9 @@ ${flags.map((f) => `    ${
 chalk.bold.blue(`--${f.name}, -${f.shortname}:`)} ${f.description}\n\t${f.examples.map((ex) => chalk.bold.gray(ex)).join("\n\t")}`).join("\n")}
 `;
     }
+    /**
+     * @returns {string}
+     * */
     static subcommands() {
         return `
 ${chalk.bold.green("[AVAILABLE SUBCOMMANDS]:")}
