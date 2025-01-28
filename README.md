@@ -1,6 +1,18 @@
 # SProjectCLI
 A CLI app to manage projects based on simplicity
 
+## Installation ⚡
+
+```bash
+$ npm i -g sprojectcli
+```
+
+## Getting Started 🚀
+
+```bash
+$ sproject --help
+```
+
 ## Features (WIP)
 
 - [ ] Check status about a project (releases, commits, pull requests, etc).
