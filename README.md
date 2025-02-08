@@ -28,9 +28,9 @@ $ sproject --help
 
 ### Subcommands (WIP)
 
-- [ ] Add **(add)**
+- [x] Add **(add)**
 - [ ] Delete **(delete)**
-- [ ] List **(list)**
+- [x] List **(list)**
 - [ ] Check status **(status)**
 - [ ] Create release **(release)**
 - [ ] Open project with code editor **(open)**
