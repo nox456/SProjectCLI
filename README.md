@@ -3,8 +3,15 @@ A CLI app to manage projects based on simplicity
 
 ## Installation ⚡
 
+### Production
+
 ```bash
 $ npm i -g sprojectcli
+```
+
+### Development
+```bash
+$ npm run dev
 ```
 
 ## Getting Started 🚀
