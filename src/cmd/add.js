@@ -3,7 +3,7 @@ import Database from "../db/Database.js";
 import Command from "./Command.js";
 import inquirer from "inquirer";
 import execCmd from "../utils/execCmd.js";
-import {access} from "fs/promises"
+import { access } from "fs/promises";
 
 export default new Command(
     {
@@ -27,12 +27,12 @@ export default new Command(
                 default: pwd.trim(),
                 validate: async (input) => {
                     try {
-                        await access(input)
-                        return true
+                        await access(input);
+                        return true;
                     } catch (e) {
-                        return e
+                        return e;
                     }
-                }
+                },
             },
             {
                 type: "input",

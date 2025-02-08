@@ -20,5 +20,8 @@ export default class Errors {
     static invalidCommand(args) {
         console.error(`${chalk.bold.red("ERROR:")} invalid subcommand -> ${chalk.bold.red(args[0])}\n${Info.subcommands()}`)
     }
+    static dbNoInitialized() {
+        console.error(`${chalk.bold.red("ERROR:")} database hasn't been initialized\n -> Please use ${chalk.bold.blue("sproject add")} to store your first project!`)
+    }
 }
 
