@@ -8,24 +8,41 @@ export default class Args {
      * @return {boolean}
      * */
     static validate(args) {
-        if (args.length > 1) {
-            Errors.unexpectedArgument(args);
-            return false;
-        } else if (
-            args[0].startsWith("-") &&
-            !args[0].startsWith("--") &&
-            !flags.map((f) => f.shortname).includes(args[0].slice(1))
-        ) {
-            Errors.invalidFlag(args);
-            return false;
-        } else if (
-            args[0].startsWith("--") &&
-            !flags.map((f) => f.name).includes(args[0].slice(2))
-        ) {
-            Errors.invalidFlag(args);
-            return false;
-        } else if (!cmds.map(c => c.name).includes(args[0]) && !args[0].startsWith("-")) {
-            Errors.invalidCommand(args);
+        if (args[0].startsWith("-")) {
+            if (
+                flags.filter(
+                    (f) =>
+                        f.name == args[0].slice(2) ||
+                        f.shortname == args[0].slice(1),
+                ).length == 0
+            ) {
+                Errors.invalidFlag(args[0]);
+                return false;
+            }
+        } else if (cmds.map((c) => c.name).includes(args[0])) {
+            if (args.length == 2) {
+                const subFlags = flags.filter((f) => f.cmd == args[0]);
+                if (
+                    args[1].startsWith("-") &&
+                    subFlags.filter(
+                        (f) =>
+                            f.name == args[1].slice(2) ||
+                            f.shortname == args[1].slice(1),
+                    ).length == 0
+                ) {
+                    Errors.invalidFlag(args[1]);
+                    return false;
+                }
+                if (!args[1].startsWith("-")) {
+                    Errors.unexpectedArgument(args.slice(1));
+                    return false;
+                }
+            } else if (args.length > 2) {
+                Errors.unexpectedArgument(args.slice(1));
+                return false;
+            }
+        } else {
+            Errors.invalidCommand(args[0]);
             return false;
         }
         return true;
@@ -40,10 +57,10 @@ export default class Args {
         flag.handler();
     }
     /**
-     * @param {string} arg 
+     * @param {string} arg
      * */
     static async handleSubcommand(arg) {
-        const subcommand = cmds.find(c => c.name == arg)
-        await subcommand.handler()
+        const subcommand = cmds.find((c) => c.name == arg);
+        await subcommand.handler();
     }
 }
