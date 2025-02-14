@@ -26,8 +26,8 @@ export default class Args {
                     args[1].startsWith("-") &&
                     subFlags.filter(
                         (f) =>
-                            f.name == args[1].slice(2) ||
-                            f.shortname == args[1].slice(1),
+                            f.name == args[1].slice(2, args[1].indexOf("=")) ||
+                            f.shortname == args[1].slice(1, args[1].indexOf("=")),
                     ).length == 0
                 ) {
                     Errors.invalidFlag(args[1]);
@@ -50,11 +50,15 @@ export default class Args {
     /**
      * @param {string} arg
      * */
-    static handleFlag(arg) {
+    static handleFlag(arg, value) {
         const flag = flags.find(
             (f) => f.name == arg.slice(2) || f.shortname == arg.slice(1),
         );
-        flag.handler();
+        if (value) {
+            flag.handler(value);
+        } else {
+            flag.handler()
+        }
     }
     /**
      * @param {string} arg

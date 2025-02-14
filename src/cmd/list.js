@@ -14,7 +14,7 @@ export default new Command(
         name: "list",
         description: "Show the projects stored in database",
     },
-    async () => {
+    async (format) => {
         if (!(await Database.isInitialized())) return Errors.dbNoInitialized();
         const fileContent = await readFile(
             join(HOME.trim(), ".sproject-db.json"),
