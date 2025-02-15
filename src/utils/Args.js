@@ -22,18 +22,36 @@ export default class Args {
         } else if (cmds.map((c) => c.name).includes(args[0])) {
             if (args.length == 2) {
                 const subFlags = flags.filter((f) => f.cmd == args[0]);
-                if (
-                    args[1].startsWith("-") &&
-                    subFlags.filter(
-                        (f) =>
-                            f.name == args[1].slice(2, args[1].indexOf("=")) ||
-                            f.shortname == args[1].slice(1, args[1].indexOf("=")),
-                    ).length == 0
-                ) {
-                    Errors.invalidFlag(args[1]);
-                    return false;
-                }
-                if (!args[1].startsWith("-")) {
+                if (args[1].startsWith("-")) {
+                    const flag = subFlags.find(
+                        (f) => f.name == args[1].slice(2),
+                    );
+                    const flagName = args[1].slice(
+                        2,
+                        args[1].indexOf("=") == -1
+                            ? args[1].length
+                            : args[1].indexOf("="),
+                    );
+                    const flagShortName = args[1].slice(
+                        1,
+                        args[1].indexOf("=") == -1
+                            ? args[1].length
+                            : args[1].indexOf("="),
+                    );
+                    if (
+                        subFlags.filter(
+                            (f) =>
+                                f.name == flagName ||
+                                f.shortname == flagShortName,
+                        ).length == 0
+                    ) {
+                        Errors.invalidFlag(args[1]);
+                        return false;
+                    } else if (!args[1].includes("=")) {
+                        Errors.missingFlagValue(flag);
+                        return false;
+                    }
+                } else {
                     Errors.unexpectedArgument(args.slice(1));
                     return false;
                 }
@@ -55,9 +73,11 @@ export default class Args {
             (f) => f.name == arg.slice(2) || f.shortname == arg.slice(1),
         );
         if (value) {
+            if (!flag.values.includes(value))
+                return Errors.invalidFlagValue(value, flag);
             flag.handler(value);
         } else {
-            flag.handler()
+            flag.handler();
         }
     }
     /**

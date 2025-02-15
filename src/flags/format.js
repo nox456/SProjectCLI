@@ -8,6 +8,7 @@ export default new Flag(
         shortname: "f",
         description: "Specify the output format",
         cmd: "list",
+        values: ["table", "json"],
         examples: ["$ sproject list --format=json", "$ sproject -f json"]
     },
     (value) => {
