@@ -24,32 +24,36 @@ export default new Command(
         );
         const { projects } = JSON.parse(fileContent);
         if (projects.length > 0) {
-            const data = [
-                [
-                    chalk.bold.blue("Name"),
-                    chalk.bold.blue("Path"),
-                    chalk.bold.blue("Github URL"),
-                ],
-            ];
-            projects.forEach((project) => {
-                const { github } = project;
-                const githubUrl = github.slice(
-                    github.indexOf("/", github.indexOf("github.com")) + 1,
+            if (!format || format == "table") {
+                const data = [
+                    [
+                        chalk.bold.blue("Name"),
+                        chalk.bold.blue("Path"),
+                        chalk.bold.blue("Github URL"),
+                    ],
+                ];
+                projects.forEach((project) => {
+                    const { github } = project;
+                    const githubUrl = github.slice(
+                        github.indexOf("/", github.indexOf("github.com")) + 1,
+                    );
+                    data.push([
+                        chalk.bold.cyan(project.name),
+                        chalk.bold.white(project.path),
+                        chalk.bold.green(githubUrl) || chalk.bold.red("NOT LINKED"),
+                    ]);
+                });
+                console.log(
+                    table(data, {
+                        header: {
+                            content: chalk.bold.blue("Projects"),
+                            alignment: "center",
+                        },
+                    }),
                 );
-                data.push([
-                    chalk.bold.cyan(project.name),
-                    chalk.bold.white(project.path),
-                    chalk.bold.green(githubUrl) || chalk.bold.red("NOT LINKED"),
-                ]);
-            });
-            console.log(
-                table(data, {
-                    header: {
-                        content: chalk.bold.blue("Projects"),
-                        alignment: "center",
-                    },
-                }),
-            );
+            } else if (format == "json") {
+                console.log(fileContent)
+            }
         } else {
             console.log(chalk.bold.whiteBright("--NO PROJECTS STORED--"))
         }
