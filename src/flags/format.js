@@ -5,11 +5,10 @@ import cmds from "../cmd/index.js";
 export default new Flag(
     {
         name: "format",
-        shortname: "f",
         description: "Specify the output format",
         cmd: "list",
         values: ["table", "json"],
-        examples: ["$ sproject list --format=json", "$ sproject -f json"]
+        examples: ["$ sproject list", "$ sproject list --format=json"]
     },
     (value) => {
         const subcommand = cmds.find(c => c.name == "list")

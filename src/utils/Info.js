@@ -11,7 +11,7 @@ export default class Info {
         return `
 ${chalk.bold.green("[AVAILABLE FLAGS]:")}
 ${flags.map((f) => `    ${
-chalk.bold.blue(`--${f.name}, -${f.shortname}:`)} ${f.description}\n\t${f.examples.map((ex) => chalk.bold.gray(ex)).join("\n\t")}`).join("\n")}
+chalk.bold.blue(`--${f.name}${f.shortname ? `, -${f.shortname}` : ""}:`)} ${f.description}${f.values ? `${chalk.bold.blue(`    values: `)}${f.values.map(v => chalk.bold.green(v)).join("|")}` : ""}\n\t${f.examples.map((ex) => chalk.bold.gray(ex)).join("\n\t")}`).join("\n")}
 `;
     }
     /**

@@ -22,7 +22,7 @@ export default class Args {
         } else if (cmds.map((c) => c.name).includes(args[0])) {
             if (args.length == 2) {
                 const subFlags = flags.filter((f) => f.cmd == args[0]);
-                if (args[1].startsWith("-")) {
+                if (args[1].startsWith("--")) {
                     const flag = subFlags.find(
                         (f) => f.name == args[1].slice(2),
                     );
@@ -32,17 +32,10 @@ export default class Args {
                             ? args[1].length
                             : args[1].indexOf("="),
                     );
-                    const flagShortName = args[1].slice(
-                        1,
-                        args[1].indexOf("=") == -1
-                            ? args[1].length
-                            : args[1].indexOf("="),
-                    );
                     if (
                         subFlags.filter(
                             (f) =>
-                                f.name == flagName ||
-                                f.shortname == flagShortName,
+                                f.name == flagName
                         ).length == 0
                     ) {
                         Errors.invalidFlag(args[1]);
