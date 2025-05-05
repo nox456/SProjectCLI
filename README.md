@@ -25,6 +25,10 @@ $ sproject --help
 - [ ] Check status about a project (releases, commits, pull requests, etc).
 - [ ] Create releases with semantic versioning and publish it on github
 - [ ] Open a project with your favorite code editor
+- [ ] Create PRs on github
+    - [ ] Link PRs to issues
+- [ ] Create issues on github
+    - [ ] Link issues to PRs
 
 ### Subcommands (WIP)
 
