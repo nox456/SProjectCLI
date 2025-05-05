@@ -2,6 +2,7 @@ import execCmd from "../utils/execCmd.js";
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import chalk from "chalk";
+import Project from "../models/Project.js";
 
 const HOME = await execCmd("printenv HOME");
 
@@ -41,4 +42,14 @@ export default class Database {
         const formattedData = await execCmd(`echo '${JSON.stringify(data)}' | jq .`)
         await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData)
     }
+	/**
+	 * @returns {Promise<Project[]>}
+	 * */
+	static async getProjects() {
+		const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
+			encoding: "utf8",
+		});
+		const data = JSON.parse(content);
+		return data["projects"];
+	}
 }
