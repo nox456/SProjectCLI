@@ -1,4 +1,4 @@
-import Flag from "./Flag.js";
+import Flag from "../models/Flag.js";
 
 export default new Flag(
     {

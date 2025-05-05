@@ -1,4 +1,4 @@
-import Flag from "../flags/Flag.js";
+import Flag from "../models/Flag.js";
 import Info from "./Info.js";
 import chalk from "chalk";
 

@@ -1,4 +1,4 @@
-import Errors from "../utils/Errors.js";
+import Errors from "../models/Errors.js";
 import flags from "../flags/index.js";
 import cmds from "../cmd/index.js";
 

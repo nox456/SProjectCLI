@@ -1,6 +1,6 @@
 import Database from "../db/Database.js";
-import Errors from "../utils/Errors.js";
-import Command from "./Command.js";
+import Errors from "../models/Errors.js";
+import Command from "../models/Command.js";
 import chalk from "chalk";
 import { readFile } from "fs/promises";
 import { join } from "path";

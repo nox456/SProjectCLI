@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import Database from "../db/Database.js";
-import Command from "./Command.js";
+import Command from "../models/Command.js";
 import inquirer from "inquirer";
 import execCmd from "../utils/execCmd.js";
 import { access } from "fs/promises";

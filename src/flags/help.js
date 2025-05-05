@@ -1,5 +1,5 @@
-import Flag from "./Flag.js";
-import Info from "../utils/Info.js";
+import Flag from "../models/Flag.js";
+import Info from "../models/Info.js";
 
 export default new Flag(
     {

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import Args from "../utils/Args.js";
+import Args from "../models/Args.js";
 
 import help from "../flags/help.js";
 
