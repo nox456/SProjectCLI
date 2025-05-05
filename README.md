@@ -29,6 +29,7 @@ $ sproject --help
     - [ ] Link PRs to issues
 - [ ] Create issues on github
     - [ ] Link issues to PRs
+- [ ] Open repository on github
 
 ### Subcommands (WIP)
 
@@ -38,5 +39,3 @@ $ sproject --help
 - [ ] Check status **(status)**
 - [ ] Create release **(release)**
 - [ ] Open project with code editor **(open)**
-- [ ] Open configuration file **(open-config)**
-- [ ] Initialize default configuration file **(init)**
