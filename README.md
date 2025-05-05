@@ -34,7 +34,7 @@ $ sproject --help
 ### Subcommands (WIP)
 
 - [x] Add **(add)**
-- [ ] Delete **(delete)**
+- [x] Delete **(delete)**
 - [x] List **(list)**
 - [ ] Check status **(status)**
 - [ ] Create release **(release)**
