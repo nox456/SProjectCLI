@@ -49,4 +49,17 @@ export default class Errors {
             `${chalk.bold.red("ERROR:")} missing value for the flag -> ${chalk.bold.red(flag.name)}\n${Info.flagValues(flag)}`,
         );
     }
+    static projectsNotStored() {
+        console.error(
+            chalk.bold.whiteBright(
+                `--NO PROJECTS STORED--\n -> Please use ${chalk.bold.blue("sproject add")} to store your first project!`,
+            ),
+        );
+    }
+	/**
+	 * @param {string} projectName
+	 * */
+	static projectNotFound(projectName) {
+		console.error(`${chalk.bold.red("ERROR:")} project not found -> ${chalk.bold.red(projectName)}\n`)
+	}
 }

@@ -66,7 +66,7 @@ export default class Args {
             (f) => f.name == arg.slice(2) || f.shortname == arg.slice(1),
         );
         if (value) {
-            if (!flag.values.includes(value))
+            if (flag.values.length > 0 && !flag.values.includes(value))
                 return Errors.invalidFlagValue(value, flag);
             flag.handler(value);
         } else {

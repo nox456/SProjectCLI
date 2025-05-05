@@ -52,4 +52,16 @@ export default class Database {
 		const data = JSON.parse(content);
 		return data["projects"];
 	}
+	/**
+	* @param {string} projectName
+	* */
+	static async deleteProject(projectName) {
+		const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
+			encoding: "utf8",
+		});
+		const data = JSON.parse(content);
+		data["projects"] = data["projects"].filter((p) => p.name != projectName);
+		const formattedData = await execCmd(`echo '${JSON.stringify(data)}' | jq .`)
+		await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData)
+	}
 }

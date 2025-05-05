@@ -15,7 +15,7 @@ export default new Command(
         const projects = await Database.getProjects();
 
         if (projects.length == 0) {
-            console.log(chalk.bold.whiteBright("--NO PROJECTS STORED--"));
+			Errors.projectsNotStored();
             return;
         }
 

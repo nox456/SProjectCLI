@@ -15,7 +15,7 @@ ${flags
         (f) =>
             `    ${chalk.bold.blue(
                 `--${f.name}${f.shortname ? `, -${f.shortname}` : ""}:`,
-            )} ${f.description}${f.values ? `${chalk.bold.blue(`    values: `)}${f.values.map((v) => chalk.bold.green(v)).join("|")}` : ""}\n\t${f.examples.map((ex) => chalk.bold.gray(ex)).join("\n\t")}`,
+            )} ${f.description}${f.values && f.values.length > 0 ? `${chalk.bold.blue(`    values: `)}${f.values.map((v) => chalk.bold.green(v)).join("|")}` : ""}\n\t${f.examples.map((ex) => chalk.bold.gray(ex)).join("\n\t")}`,
     )
     .join("\n")}
 `;
