@@ -32,7 +32,7 @@ ${cmds.map((c) => `    ${chalk.bold.blue(`${c.name}:`)} ${c.description}`).join(
     /**
      * @param {Flag} flag
      * */
-    static flagVales(flag) {
+    static flagValues(flag) {
         return `
 ${chalk.bold.green("[AVAILABLE VALUES]:")}
 ${chalk.bold.blue(`    --${flag.name}=`)}${flag.values.map((v) => chalk.bold.green(v)).join("|")}
