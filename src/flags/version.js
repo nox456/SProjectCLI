@@ -9,6 +9,6 @@ export default new Flag(
         examples: ["$ sproject --version", "$ sproject -v"],
     },
     () => {
-        console.log("v0.1.2")
+        console.log("v0.2.2")
     },
 );
