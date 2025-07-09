@@ -12,7 +12,6 @@
         "url": "git+https://github.com/nox456/SProjectCLI.git"
     },
     "keywords": [
-        "nodejs",
         "cli",
         "javascript",
         "projects"
