@@ -21,23 +21,16 @@ export default class Args {
             }
         } else if (cmds.map((c) => c.name).includes(args[0])) {
             if (args.length == 2) {
-                const subFlags = flags.filter((f) => f.cmd == args[0]);
+                const subFlags = flags.filter((f) => f.cmds.includes(args[0]));
                 if (args[1].startsWith("--")) {
-                    const flag = subFlags.find(
-                        (f) => f.name == args[1].slice(2),
-                    );
                     const flagName = args[1].slice(
                         2,
                         args[1].indexOf("=") == -1
                             ? args[1].length
                             : args[1].indexOf("="),
                     );
-                    if (
-                        subFlags.filter(
-                            (f) =>
-                                f.name == flagName
-                        ).length == 0
-                    ) {
+                    const flag = subFlags.find((f) => f.name == flagName);
+                    if (!flag) {
                         Errors.invalidFlag(args[1]);
                         return false;
                     } else if (!args[1].includes("=")) {
@@ -59,16 +52,18 @@ export default class Args {
         return true;
     }
     /**
+     * @param {string} cmd
      * @param {string} arg
+     * @param {string} value
      * */
-    static handleFlag(arg, value) {
+    static handleFlag(cmd, arg, value) {
         const flag = flags.find(
             (f) => f.name == arg.slice(2) || f.shortname == arg.slice(1),
         );
         if (value) {
             if (flag.values.length > 0 && !flag.values.includes(value))
                 return Errors.invalidFlagValue(value, flag);
-            flag.handler(value);
+            flag.handler(value, cmd);
         } else {
             flag.handler();
         }

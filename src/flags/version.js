@@ -5,10 +5,10 @@ export default new Flag(
         name: "version",
         shortname: "v",
         description: "Show the current release version of the app",
-        cmd: "",
+        cmds: [],
         examples: ["$ sproject --version", "$ sproject -v"],
     },
     () => {
-        console.log("v0.2.2")
+        console.log("v0.2.2");
     },
 );

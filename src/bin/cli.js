@@ -13,10 +13,11 @@ if (args.length == 0) {
 }
 
 if (args[0].startsWith("-")) {
-    Args.handleFlag(args[0]);
+    Args.handleFlag("", args[0], "");
     process.exit(0);
 } else if (args.length == 2) {
     Args.handleFlag(
+        args[0],
         args[1].slice(0, args[1].indexOf("=")),
         args[1].slice(args[1].indexOf("=") + 1),
     );
