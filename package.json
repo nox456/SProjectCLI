@@ -1,6 +1,6 @@
 {
     "name": "sprojectcli",
-    "version": "0.2.2",
+    "version": "0.3.2",
     "description": "A CLI app to manage projects",
     "main": "index.js",
     "type": "module",
