@@ -20,11 +20,15 @@ export function execCmd(cmd) {
 
 /**
  * @param {string} cmd
+ * @param {string[]} args
  * @returns {Promise<void>}
  * */
-export function spawnCmd(cmd) {
+export function spawnCmd(cmd, args, cwd) {
     return new Promise((resolve, reject) => {
-        const { stderr } = spawnSync(cmd);
+        const { stderr } = spawnSync(cmd, args, {
+            stdio: "inherit",
+            cwd,
+        });
         if (stderr) {
             reject(stderr);
         } else {
