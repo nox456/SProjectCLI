@@ -2,7 +2,7 @@ import chalk from "chalk";
 import Database from "../db/Database.js";
 import Command from "../models/Command.js";
 import inquirer from "inquirer";
-import execCmd from "../utils/execCmd.js";
+import { execCmd } from "../utils/shell.js";
 import { access } from "fs/promises";
 
 export default new Command(

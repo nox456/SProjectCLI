@@ -1,4 +1,4 @@
-import execCmd from "../utils/execCmd.js";
+import { execCmd } from "../utils/shell.js";
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import chalk from "chalk";
@@ -28,10 +28,10 @@ export default class Database {
             .includes(".sproject-db.json");
     }
     /**
-     * @param {Object} param0 
-     * @param {string} param0.name 
-     * @param {string} param0.path 
-     * @param {string} param0.github 
+     * @param {Object} param0
+     * @param {string} param0.name
+     * @param {string} param0.path
+     * @param {string} param0.github
      * */
     static async addProject({ name, path, github }) {
         const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
@@ -39,29 +39,35 @@ export default class Database {
         });
         const data = JSON.parse(content);
         data["projects"].push({ name, path, github });
-        const formattedData = await execCmd(`echo '${JSON.stringify(data)}' | jq .`)
-        await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData)
+        const formattedData = await execCmd(
+            `echo '${JSON.stringify(data)}' | jq .`,
+        );
+        await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData);
     }
-	/**
-	 * @returns {Promise<Project[]>}
-	 * */
-	static async getProjects() {
-		const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
-			encoding: "utf8",
-		});
-		const data = JSON.parse(content);
-		return data["projects"];
-	}
-	/**
-	* @param {string} projectName
-	* */
-	static async deleteProject(projectName) {
-		const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
-			encoding: "utf8",
-		});
-		const data = JSON.parse(content);
-		data["projects"] = data["projects"].filter((p) => p.name != projectName);
-		const formattedData = await execCmd(`echo '${JSON.stringify(data)}' | jq .`)
-		await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData)
-	}
+    /**
+     * @returns {Promise<Project[]>}
+     * */
+    static async getProjects() {
+        const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
+            encoding: "utf8",
+        });
+        const data = JSON.parse(content);
+        return data["projects"];
+    }
+    /**
+     * @param {string} projectName
+     * */
+    static async deleteProject(projectName) {
+        const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
+            encoding: "utf8",
+        });
+        const data = JSON.parse(content);
+        data["projects"] = data["projects"].filter(
+            (p) => p.name != projectName,
+        );
+        const formattedData = await execCmd(
+            `echo '${JSON.stringify(data)}' | jq .`,
+        );
+        await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData);
+    }
 }
