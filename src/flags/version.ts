@@ -6,6 +6,7 @@ export default new Flag(
         shortname: "v",
         description: "Show the current release version of the app",
         cmds: [],
+        values: [],
         examples: ["$ sproject --version", "$ sproject -v"],
     },
     () => {

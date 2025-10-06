@@ -5,12 +5,14 @@ export default new Flag(
     {
         name: "projectName",
         description: "Specify the project name",
-        cmds: ["delete"],
+        cmds: ["delete", "open"],
         values: [],
         examples: ["$ sproject subcommand --projectName=example"],
     },
-    (value, cmd) => {
+    (value?: string, cmd?: any) => {
         const subcommand = cmds.find((c) => c.name == cmd);
-        subcommand.handler(value);
+        if (subcommand) {
+            subcommand.handler(value);
+        }
     },
 );

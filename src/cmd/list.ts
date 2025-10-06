@@ -9,7 +9,7 @@ export default new Command(
         name: "list",
         description: "Show the projects stored in database",
     },
-    async (format) => {
+    async (format?: string) => {
         if (!(await Database.isInitialized())) return Errors.dbNoInitialized();
 
         const projects = await Database.getProjects();
@@ -27,7 +27,7 @@ export default new Command(
                     chalk.bold.blue("Github URL"),
                 ],
             ];
-            projects.forEach((project) => {
+            projects.forEach((project: any) => {
                 const { github } = project;
                 const githubUrl = github.slice(
                     github.indexOf("/", github.indexOf("github.com")) + 1,
@@ -47,7 +47,7 @@ export default new Command(
                 }),
             );
         } else if (format == "json") {
-            console.log(fileContent);
+            console.log(JSON.stringify(projects, null, 2));
         }
     },
 );

@@ -1,13 +1,11 @@
 import Errors from "../models/Errors.js";
 import flags from "../flags/index.js";
 import cmds from "../cmd/index.js";
+import Command from "./Command.js";
+import Flag from "./Flag.js";
 
 export default class Args {
-    /**
-     * @param {string[]} args
-     * @return {boolean}
-     * */
-    static validate(args) {
+    static validate(args: string[]): boolean {
         if (args[0].startsWith("-")) {
             if (
                 flags.filter(
@@ -51,15 +49,11 @@ export default class Args {
         }
         return true;
     }
-    /**
-     * @param {string} cmd
-     * @param {string} arg
-     * @param {string} value
-     * */
-    static handleFlag(cmd, arg, value) {
+    static handleFlag(cmd: Command | string, arg: string, value?: string): void {
         const flag = flags.find(
             (f) => f.name == arg.slice(2) || f.shortname == arg.slice(1),
         );
+        if (!flag) return;
         if (value) {
             if (flag.values.length > 0 && !flag.values.includes(value))
                 return Errors.invalidFlagValue(value, flag);
@@ -68,11 +62,10 @@ export default class Args {
             flag.handler();
         }
     }
-    /**
-     * @param {string} arg
-     * */
-    static async handleSubcommand(arg) {
+    static async handleSubcommand(arg: string): Promise<void> {
         const subcommand = cmds.find((c) => c.name == arg);
-        await subcommand.handler();
+        if (subcommand) {
+            await subcommand.handler();
+        }
     }
 }

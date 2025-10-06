@@ -7,6 +7,7 @@ export default new Flag(
         shortname: "h",
         description: "Show a help message",
         cmds: [],
+        values: [],
         examples: ["$ sproject --help", "$ sproject -h"],
     },
     () => {

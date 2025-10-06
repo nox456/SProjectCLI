@@ -9,8 +9,10 @@ export default new Flag(
         values: ["table", "json"],
         examples: ["$ sproject subcommand --format=json"],
     },
-    (value, cmd) => {
+    (value?: string, cmd?: any) => {
         const subcommand = cmds.find((c) => c.name == cmd);
-        subcommand.handler(value);
+        if (subcommand) {
+            subcommand.handler(value);
+        }
     },
 );

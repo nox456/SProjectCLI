@@ -1,10 +1,6 @@
 import { exec, spawnSync } from "node:child_process";
 
-/**
- * @param {string} cmd
- * @returns {Promise<string>}
- * */
-export function execCmd(cmd) {
+export function execCmd(cmd: string): Promise<string> {
     return new Promise((resolve, reject) => {
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
@@ -18,12 +14,7 @@ export function execCmd(cmd) {
     });
 }
 
-/**
- * @param {string} cmd
- * @param {string[]} args
- * @returns {Promise<void>}
- * */
-export function spawnCmd(cmd, args, cwd) {
+export function spawnCmd(cmd: string, args: string[], cwd: string): Promise<void> {
     return new Promise((resolve, reject) => {
         const { stderr } = spawnSync(cmd, args, {
             stdio: "inherit",

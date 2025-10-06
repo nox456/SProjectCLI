@@ -11,7 +11,7 @@ export default new Command(
         description:
             "Open a project with an editor using $EDITOR environment variable (fallback with nano)",
     },
-    async (projectName) => {
+    async (projectName?: string) => {
         if (!(await Database.isInitialized())) await Database.init();
 
         const projects = await Database.getProjects();
@@ -31,9 +31,9 @@ export default new Command(
             ]);
             projectName = data.projectName;
         }
-        const project = projects.find((p) => p.name == projectName);
+        const project = projects.find((p: any) => p.name == projectName);
         if (!project) {
-            Errors.projectNotFound(projectName);
+            Errors.projectNotFound(projectName!);
             return;
         }
         const editor = process.env.EDITOR || "nano";

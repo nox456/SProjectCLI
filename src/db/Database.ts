@@ -4,7 +4,7 @@ import { join } from "path";
 import chalk from "chalk";
 import Project from "../models/Project.js";
 
-const HOME = await execCmd("printenv HOME");
+const HOME = (await execCmd("printenv HOME")) as string;
 
 export default class Database {
     static async init() {
@@ -17,57 +17,42 @@ export default class Database {
             ),
         );
     }
-    /**
-     * @returns {Promise<boolean>}
-     * */
-    static async isInitialized() {
-        const files = await execCmd("ls -a $HOME");
+    static async isInitialized(): Promise<boolean> {
+        const files = (await execCmd("ls -a $HOME")) as string;
         return files
             .split("\n")
             .filter((l) => l != "." && l != ".." && l.includes("."))
             .includes(".sproject-db.json");
     }
-    /**
-     * @param {Object} param0
-     * @param {string} param0.name
-     * @param {string} param0.path
-     * @param {string} param0.github
-     * */
-    static async addProject({ name, path, github }) {
+    static async addProject({ name, path, github }: { name: string; path: string; github: string }): Promise<void> {
         const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
             encoding: "utf8",
         });
         const data = JSON.parse(content);
         data["projects"].push({ name, path, github });
-        const formattedData = await execCmd(
+        const formattedData = (await execCmd(
             `echo '${JSON.stringify(data)}' | jq .`,
-        );
+        )) as string;
         await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData);
     }
-    /**
-     * @returns {Promise<Project[]>}
-     * */
-    static async getProjects() {
+    static async getProjects(): Promise<Project[]> {
         const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
             encoding: "utf8",
         });
         const data = JSON.parse(content);
         return data["projects"];
     }
-    /**
-     * @param {string} projectName
-     * */
-    static async deleteProject(projectName) {
+    static async deleteProject(projectName: string): Promise<void> {
         const content = await readFile(join(HOME.trim(), ".sproject-db.json"), {
             encoding: "utf8",
         });
         const data = JSON.parse(content);
         data["projects"] = data["projects"].filter(
-            (p) => p.name != projectName,
+            (p: any) => p.name != projectName,
         );
-        const formattedData = await execCmd(
+        const formattedData = (await execCmd(
             `echo '${JSON.stringify(data)}' | jq .`,
-        );
+        )) as string;
         await writeFile(join(HOME.trim(), ".sproject-db.json"), formattedData);
     }
 }

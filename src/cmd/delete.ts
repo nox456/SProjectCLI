@@ -9,7 +9,7 @@ export default new Command(
 		name: "delete",
 		description: "Delete a project from database",
 	},
-	async (projectName) => {
+	async (projectName?: string) => {
 		if (!(await Database.isInitialized())) await Database.init();
 
 		const projects = await Database.getProjects();
@@ -29,11 +29,11 @@ export default new Command(
 			]);
 			projectName = data.projectName;
 		}
-		if (!projects.some((p) => p.name == projectName)) {
-			Errors.projectNotFound(projectName);
+		if (!projects.some((p: any) => p.name == projectName)) {
+			Errors.projectNotFound(projectName!);
 			return;
 		}
-		await Database.deleteProject(projectName);
+		await Database.deleteProject(projectName!);
 		console.log(`\n🗑️ Project ${chalk.bold.red(projectName)} deleted!`);
 	}
 )
